@@ -28,3 +28,6 @@ export interface IOrderLot {
 	items: string[];
 }
 
+export interface IActions {
+    onClick: (event: MouseEvent) => void; // Обработчик клика 
+}

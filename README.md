@@ -41,6 +41,64 @@ npm run build
 yarn build
 ```
 
+## Описание данных
+
+### Интерфейс карточки товара:
+
+export interface IProductItem {
+	id: string;
+	description: string;
+	image: string;
+	title: string;
+	category: string;
+	price: number | null;
+}
+
+
+### Интерфейс формы заказа:
+
+export interface IOrderForm {
+	payment: string;
+	address: string;
+	phone: string;
+	email: string;
+	total: number | null;
+	items: string[];
+}
+
+
+### Интерфейс корзины товаров:
+
+export interface IBasket {
+  basket: HTMLElement;
+  title: HTMLElement;
+  basketList: HTMLElement;
+  button: HTMLButtonElement;
+  basketPrice: HTMLElement;
+  headerBasketButton: HTMLButtonElement;
+  headerBasketCounter: HTMLElement;
+  renderHeaderBasketCounter(value: number): void;
+  renderSumAllProducts(sumAll: number): void;
+  render(): HTMLElement;
+}
+
+### Действия пользователя
+ Обработчик клика 
+ 
+export interface IActions {
+    onClick: (event: MouseEvent) => void; 
+}
+
+## События, возникающие при взаимодействии пользователя с интерфейсом.
+- `basket:open` - открытие модального окна с корзиной
+- `card:select` - выбор карточки для отображения в модальном окне
+- `card:addBasket` - выбор карточки для добавления в корзину
+- `card:delete` - выбор карточки для удаления из корзины
+- `order:paymentSelection` - сохранение данных о способе оплаты и адресе доставки
+- `order:changeAddress` - сохранение информации о способе оплаты и адресе доставки
+- `modal:open`- событие, сообщающее об открытии модального окна
+- `modal:close` - событие, сообщающее о закрытии модального окна
+
 
 ## Базовый код
 
@@ -56,9 +114,9 @@ EventEmitter выступает в роли Представителя (Presente
 # Класс `Api` имеет следующие свойства и методы.
 
 Методы:
-- `handleResponse(response: Response): Promise<object>` - обработчик ответа сервера.
-- `get(uri: string)` - принимает изменяющеюся часть url-адреса, возвращает ответ от сервера.
-- `post(uri: string, data: object, method: ApiPostMethods = 'POST')` - принимает изменяющеюся часть url-адреса, принимает данные в виде объекта для отправки на сервер, type ApiPostMethods = 'POST' | 'PUT' | 'DELETE'.
+- `handleResponse` - обработчик ответа сервера.
+- `get` - принимает изменяющеюся часть url-адреса, возвращает ответ от сервера.
+- `post` - принимает изменяющеюся часть url-адреса, принимает данные в виде объекта для отправки на сервер, type ApiPostMethods = 'POST' | 'PUT' | 'DELETE'.
 
 # Класс `EventEmitter` - брокер событий, implements от IEvents и имеет следующие методы.
 
@@ -70,7 +128,7 @@ EventEmitter выступает в роли Представителя (Presente
 - `emit` - уведомления подписчиков о наступлении события соответственно.
 - `onAll` - для подписки на все события.
 - `offAll` - сброса всех подписчиков.
-- `trigger` - генерирует заданное событие с заданными аргументами. Это позволяет передавать его в качестве обработчика события в другие классы. Эти классы будут генерировать события, не будучи при этом напрямую зависимыми от класса `EventEmitter`.
+- `trigger` - генерирует заданное событие с заданными аргументами. Это позволяет передавать его в качестве обработчика события в другие классы. 
 
 ## Описание классов Model, которые позволяют хранить и обрабатывать данные с сервера и от пользователей.
 
