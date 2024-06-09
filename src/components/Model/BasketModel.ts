@@ -10,7 +10,6 @@ export interface IBasketModel {
 }
 
 export class BasketModel implements IBasketModel {
-  // список карточек товара в корзине
   protected _basketProducts: IProductItem[]; 
 
   constructor() {
@@ -25,12 +24,12 @@ export class BasketModel implements IBasketModel {
     return this._basketProducts;
   }
 
-  // количество товара
+  // количество товара в корзине
   getCounter() {
     return this.basketProducts.length;
   }
 
-  // сумма товаров 
+  // сумма всех товаров в корзине
   getSumAllProducts() {
     let sumAll = 0;
     this.basketProducts.forEach(item => {
@@ -39,19 +38,19 @@ export class BasketModel implements IBasketModel {
     return sumAll;
   }
 
-  // добавить товар в корзину
+  // добавить карточку товара в корзину
   setSelectedСard(data: IProductItem) {
     this._basketProducts.push(data);
   }
 
-  // удалить товар из корзины
+  // удалить карточку товара из корзины
   deleteCardToBasket(item: IProductItem) {
     const index = this._basketProducts.indexOf(item);
     if (index >= 0) {
       this._basketProducts.splice(index, 1);
     }
   }
-  // очистить корзину
+
   clearBasketProducts() {
     this.basketProducts = []
   }

@@ -8,11 +8,11 @@ export interface IProductItem {
 }
 
 export interface IOrderForm {
-    payment: string;
-	address: string;
-	phone: string;
-	email: string;
-	total: string | number;
+	payment?: string;
+	address?: string;
+	phone?: string;
+	email?: string;
+	total?: string | number;
 }
 
 export interface IOrder extends IOrderForm {
@@ -28,6 +28,13 @@ export interface IOrderLot {
 	items: string[];
 }
 
-export interface IActions {
-    onClick: (event: MouseEvent) => void; // Обработчик клика 
+export interface IOrderResult {
+	id: string;
+	total: number;
 }
+
+export interface IActions {
+	onClick: (event: MouseEvent) => void; // Обработчик клика
+}
+
+export type FormErrors = { [key: string]: string | undefined };
