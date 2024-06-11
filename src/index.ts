@@ -75,7 +75,6 @@ events.on('basket:open', () => {
 // Добавление товара в корзину
 events.on('card:addBasket', () => {
 	basketModel.setSelectedСard(dataModel.selectedСard);
-	basket.renderHeaderBasketCounter(basketModel.getCounter());
 	events.emit('basket:change');
 	modal.close();
 });
@@ -83,7 +82,6 @@ events.on('card:addBasket', () => {
 // Удаление товара из корзины
 events.on('basket:basketItemRemove', (item: IProductItem) => {
 	basketModel.deleteCardToBasket(item);
-	basket.renderHeaderBasketCounter(basketModel.getCounter());
 	events.emit('basket:change');
 });
 
@@ -104,21 +102,6 @@ function renderBasketContent() {
 
 	modal.content = basket.render();
 	modal.render();
-}
-
-events.on('basket:change', () => {
-	updateBasketItems();
-	modal.content = basket.render();
-	modal.render();
-});
-
-function updateBasketItems() {
-	basket.items = basketModel.basketProducts.map((item, index) => {
-		const basketItem = new BasketItem(cardBasketTemplate, events, {
-			onClick: () => events.emit('basket:basketItemRemove', item),
-		});
-		return basketItem.render(item, index + 1);
-	});
 }
 
 // Открытие модального окна "способа оплаты" и "адреса доставки"
